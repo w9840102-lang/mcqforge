@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <title>All Topics • SmartStudy</title>
+
+  <!-- Use same CSS -->
+  <link rel="stylesheet" href="styles.css?v=21" />
+
+  <style>
+    /* ✅ Phone-first layout for topics page */
+    .topicsShell{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px 14px 40px;
+    }
+    .topicsTop{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 12px;
+    }
+    .topicsTitle{
+      font-weight: 1000;
+      font-size: 20px;
+      letter-spacing: -.01em;
+      margin: 0;
+    }
+    .topicsSub{
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+    .searchBox{
+      width: 100%;
+      margin-top: 12px;
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      background: rgba(255,255,255,.92);
+      border: 1px solid var(--stroke);
+      border-radius: 16px;
+      padding: 10px 12px;
+      box-shadow: 0 10px 24px rgba(15,23,42,.05);
+    }
+    .searchBox input{
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .searchIcon{
+      font-size: 16px;
+      opacity: .8;
+    }
+
+    .topicsGrid{
+      margin-top: 14px;
+      display:grid;
+      gap: 12px;
+      grid-template-columns: 1fr; /* ✅ mobile default */
+    }
+
+    /* Tablets */
+    @media (min-width: 640px){
+      .topicsGrid{ grid-template-columns: 1fr 1fr; }
+    }
+
+    /* Desktop */
+    @media (min-width: 980px){
+      .topicsGrid{ grid-template-columns: 1fr 1fr 1fr; }
+    }
+
+    /* Topic cards */
+    .topicCard{
+      border-radius: 18px;
+      border: 1px solid rgba(15,23,42,.08);
+      background: rgba(255,255,255,.92);
+      padding: 14px;
+      box-shadow: 0 10px 24px rgba(15,23,42,.06);
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor:pointer;
+      transition: transform .12s ease, box-shadow .18s ease, filter .18s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .topicCard:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 14px 32px rgba(15,23,42,.10);
+    }
+    .topicLeft{
+      display:flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+    .topicName{
+      font-weight: 1000;
+      font-size: 16px;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .topicMeta{
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .topicGo{
+      flex: 0 0 auto;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, var(--p1), var(--p2));
+      color: white;
+      font-weight: 1000;
+      box-shadow:
+        0 8px 18px rgba(109,40,217,.45),
+        inset 0 1px 0 rgba(255,255,255,.35);
+    }
+
+    .warnBox{
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px dashed rgba(220,38,38,.35);
+      background: rgba(220,38,38,.06);
+      color: #7f1d1d;
+      font-weight: 900;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Topbar (same style) -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">
+        <img src="./mcqforge-logo.png?v=1" alt="MCQForge Logo">
+      </div>
+      <div class="brandText">
+        <div class="brandTitle">SmartStudy</div>
+        <div class="brandSub">All Topics</div>
+      </div>
+    </div>
+
+    <div class="topActions">
+      <button class="btn pillBtn" type="button" id="btnBack">Back</button>
+    </div>
+  </header>
+
+  <main class="topicsShell">
+    <div class="topicsTop">
+      <div>
+        <h1 class="topicsTitle">Choose a topic 📚</h1>
+        <div class="topicsSub">Tap any topic to return to Home and generate MCQs</div>
+      </div>
+    </div>
+
+    <!-- Search -->
+    <div class="searchBox">
+      <div class="searchIcon">🔎</div>
+      <input id="topicSearch" type="text" placeholder="Search topics… (ex: Physics, Biology)" autocomplete="off" />
+    </div>
+
+    <div id="warnBox" class="warnBox" style="display:none;">
+      ⚠️ bank.js not loaded. Make sure topics.html includes: <b>bank.js</b> before <b>topics.js</b>
+    </div>
+
+    <!-- Grid -->
+    <div class="topicsGrid" id="topicsGrid"></div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- ✅ bank first -->
+  <script src="bank.js?v=21"></script>
+
+  <!-- ✅ topics logic -->
+  <script src="topics.js?v=21"></script>
+</body>
+</html>
+

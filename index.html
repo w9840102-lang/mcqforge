@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <title>SmartStudy MCQ</title>
+  <link rel="stylesheet" href="styles.css?v=23"/>
+  </head>
+
+<body>
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">
+        <img src="./mcqforge-logo.png?v=1" alt="SmartStudy Logo">
+      </div>
+      <div class="brandText">
+        <div class="brandTitle">SmartStudy</div>
+        <div class="brandSub">Upload Notes • Practice MCQs</div>
+      </div>
+    </div>
+
+    <div class="topActions">
+      <button class="btn pillBtn" type="button" id="btnClear">Reset</button>
+      <button class="btn btnPrimary" type="button" id="btnGenerate">Generate</button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="heroInner">
+      <div class="badge">FAST PRACTICE • CLEAN QUESTIONS • REAL IMPROVEMENT</div>
+      <h1 class="heroTitle">Turn learning into <span class="grad1">instant MCQs</span></h1>
+      <p class="heroSub">
+        Upload your notes image or choose a topic. Practice exam-style MCQs instantly.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main -->
+  <main class="shell">
+
+    <!-- Upload + Categories -->
+    <section class="grid2">
+
+      <!-- Upload Card -->
+      <div class="card">
+        <div class="cardHead">
+          <div>
+            <div class="cardTitle">Upload Notes Image</div>
+            <div class="cardSub">Tap to upload (or drag & drop on laptop)</div>
+          </div>
+          <div class="chip" id="uploadChip">Upload</div>
+        </div>
+
+        <input id="fileInput" type="file" accept="image/*" hidden />
+
+        <div class="uploadBox" id="uploadBox" tabindex="0" role="button" aria-label="Upload image">
+          <div class="uploadHint" id="uploadHint">
+            <div class="uploadBig">Tap to upload</div>
+            <div class="uploadSmall">Choose an image from your gallery</div>
+          </div>
+          <img id="imgPreview" alt="Preview" />
+        </div>
+
+        <div class="uploadActions">
+          <button class="btn btnDanger" type="button" id="btnRemoveImage">Remove</button>
+          <div class="tinyNote" id="imgNote">No image selected</div>
+        </div>
+
+        <div class="hintLine">
+          After uploading, press <b>Generate</b> to create MCQs.
+        </div>
+      </div>
+
+      <!-- Topics Card -->
+      <div class="card">
+        <div class="cardHead">
+          <div>
+            <div class="cardTitle">Choose Topic</div>
+            <div class="cardSub">Tap a topic, then press <b>Generate</b></div>
+          </div>
+
+          <button class="chip" type="button" id="btnMoreTopics">More</button>
+        </div>
+
+        <!-- Question count -->
+        <div class="qRow">
+          <div class="qLabel">Questions:</div>
+          <select id="qCount" class="qSelect">
+            <option value="5">5</option>
+            <option value="10" selected>10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+          </select>
+        </div>
+
+        <div class="catGrid" id="catGrid"></div>
+      </div>
+
+    </section>
+
+    <!-- MCQs -->
+    <section class="card mcqCard">
+      <div class="cardHead">
+        <div>
+          <div class="cardTitle">MCQs</div>
+          <div class="cardSub" id="mcqSub">
+            Upload an image or choose a topic, then press Generate.
+          </div>
+        </div>
+        <div class="chip" id="statusChip">Instant</div>
+      </div>
+
+      <!-- Stats -->
+      <div class="scoreRow">
+        <div class="scoreBox">
+          <div class="scoreNum" id="sTotal">0</div>
+          <div class="scoreLab">Total</div>
+        </div>
+        <div class="scoreBox">
+          <div class="scoreNum" id="sAnswered">0</div>
+          <div class="scoreLab">Answered</div>
+        </div>
+        <div class="scoreBox">
+          <div class="scoreNum" id="sCorrect">0</div>
+          <div class="scoreLab">Correct</div>
+        </div>
+        <div class="scoreBox">
+          <div class="scoreNum" id="sAcc">0%</div>
+          <div class="scoreLab">Accuracy</div>
+        </div>
+      </div>
+
+      <!-- List -->
+      <div class="mcqList" id="mcqList"></div>
+
+      <!-- Empty State -->
+      <div class="emptyState" id="emptyState">
+        <div class="emptyTitle">No questions yet</div>
+        <div class="emptySub">
+          Upload an image or choose a topic, then press <b>Generate</b>.
+        </div>
+      </div>
+
+      <!-- ✅ Submit removed (as requested). Reset is in topbar. -->
+    </section>
+
+  </main>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Loader Overlay -->
+  <div class="loaderOverlay" id="loaderOverlay">
+    <div class="loaderCard">
+      <div class="loaderTopRow">
+        <div class="spinner"></div>
+        <div class="loaderText" id="loaderText">Generating MCQs…</div>
+      </div>
+
+      <div class="loaderBar">
+        <div class="loaderBarFill" id="loaderBarFill"></div>
+      </div>
+
+      <div class="loaderTip" id="loaderTip">Analyzing…</div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="bank.js?v=999"></script>
+  <script src="app.js?v=999" defer></script>
+
+  <!-- Topics page navigation -->
+  <script>
+    const btnMoreTopics = document.getElementById("btnMoreTopics");
+    if (btnMoreTopics) {
+      btnMoreTopics.addEventListener("click", () => {
+        window.location.href = "topics.html";
+      });
+    }
+  </script>
+
+</body>
+</html>
+
