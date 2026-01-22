@@ -584,8 +584,7 @@ async function generate() {
       if (!res.ok) {
   const errText = await res.text().catch(() => "");
   console.log("AI ERROR RESPONSE:", res.status, errText);
-  toast("🚨 AI server error. Check console/network.");
-  if ($("mcqSub")) $("mcqSub").textContent = "AI failed (no fallback).";
+  toast("🚨 AI server error. Please try again.");
   return;
 }
 
@@ -659,6 +658,7 @@ function init() {
 }
 
 init();
+
 
 
 
