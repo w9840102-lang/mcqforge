@@ -582,16 +582,12 @@ async function generate() {
       );
 
       if (!res.ok) {
-        toast("🚨 AI server error. Try again later");
-        // fallback (so app never feels dead)
-        const fallbackTopic = Object.keys(CATEGORY_BANK)[0];
-        if (fallbackTopic) {
-          const fallback = buildMCQsFromCategory(fallbackTopic, 10);
-          if ($("mcqSub")) $("mcqSub").textContent = `Fallback: ${fallbackTopic}`;
-          renderMCQs(fallback, "Analysis");
-        }
-        return;
-      }
+  const errText = await res.text().catch(() => "");
+  console.log("AI ERROR RESPONSE:", res.status, errText);
+  toast("🚨 AI server error. Check console/network.");
+  if ($("mcqSub")) $("mcqSub").textContent = "AI failed (no fallback).";
+  return;
+}
 
       const data = await res.json();
       const fixed = normalizeMCQs(data?.mcqs || data?.questions || []).map(shuffleMCQ);
@@ -663,5 +659,6 @@ function init() {
 }
 
 init();
+
 
 
